@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Delivery Time Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/pywebio@1.9.2/dist/pywebio.min.js"></script>
+</head>
+<body>
+    <h1>Food Delivery Time Prediction</h1>
+    
+    <form onsubmit="predict()">
+        <label for="age">Age of Delivery Partner:</label>
+        <input type="number" id="age" name="age"><br><br>
+        
+        <label for="ratings">Ratings of Previous Deliveries:</label>
+        <input type="number" id="ratings" name="ratings"><br><br>
+        
+        <label for="distance">Total Distance:</label>
+        <input type="number" id="distance" name="distance"><br><br>
+        
+        <input type="submit" value="Predict">
+    </form>
+    
+    <p id="output"></p>
+
+    <script>
+        function predict() {
+            pywebio.inputFloat("Age of Delivery Partner:", {label: "Age"})
+                .then((age) => {
+                    return pywebio.inputFloat("Ratings of Previous Deliveries:", {label: "Ratings"});
+                })
+                .then((ratings) => {
+                    return pywebio.inputFloat("Total Distance:", {label: "Distance"});
+                })
+                .then((distance) => {
+                    return pywebio.output.put_text("Predicted Delivery Time in Minutes:", "Your predicted time will appear here.");
+                });
+        }
+    </script>
+</body>
+</html>
